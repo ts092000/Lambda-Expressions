@@ -1,8 +1,7 @@
 package com.bkitsolution;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.function.*;
 
 public class Main {
@@ -77,14 +76,74 @@ public class Main {
 //        names.forEach(s -> System.out.println(s));
 
         //Objects and primirive types
-        IntSupplier supplier = () -> 10 + 15;
-        int j = 20;
-        int i = supplier.getAsInt() + j;
-        System.out.println("i = " + i);
+//        IntSupplier supplier = () -> 10 + 15;
+//        int j = 20;
+//        int i = supplier.getAsInt() + j;
+//        System.out.println("i = " + i);
+//
+//        DoubleToIntFunction function = value -> (int)(Math.floor(value));
+//        int pi = function.applyAsInt(Math.PI);
+//        System.out.println("Integer PI = " + pi);
 
-        DoubleToIntFunction function = value -> (int)(Math.floor(value));
-        int pi = function.applyAsInt(Math.PI);
-        System.out.println("Integer PI = " + pi);
+        //Chapter 5: Creating lambdas by chaining and composing other lambdas
+//        Consumer<String> c1 = s -> System.out.println("c1 consumes " + s);
+//        Consumer<String> c2 = s -> System.out.println("c2 consumes " + s);
+//
+//        Consumer<String> c3 = c1.andThen(c2);
+//
+//        c3.accept("Hello");
+
+//        Predicate<String> isNull = Objects::isNull;
+//        Predicate<String> isNull = s -> s == null;
+//        System.out.println("For Null = " + isNull.test(null));
+//        System.out.println("For Hello = " + isNull.test("Hello"));
+
+//        Predicate<String> isEmpty = String::isEmpty;
+//        Predicate<String> isEmpty = s -> s.isEmpty();
+//        System.out.println("For Empty = " + isEmpty.test(""));
+//        System.out.println("For Hello = " + isEmpty.test("Hello"));
+//        Predicate<String> p = isNull.negate().and(isEmpty.negate());
+//        System.out.println("For Null = " + p.test(null));
+//        System.out.println("For Empty = " + p.test(""));
+//        System.out.println("For Hello = " + p.test("Hello"));
+
+//        List<String> strings =
+//                Arrays.asList("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten");
+//
+//        Comparator<String> comparator =
+//                (s1, s2) -> s1.compareTo(s2);
+//
+//        strings.sort(comparator);
+//        System.out.println("Sort to alphabet: " + strings);
+
+////        Function<String, Integer> toLength = String::length;
+//        Function<String, Integer> toLength = s -> s.length();
+//
+////        Comparator<String> comparator2 =
+////                (s1, s2) -> Integer.compare(s1.length(), s2.length());
+//        Comparator<String> comparator2 = Comparator.comparing(toLength);
+//
+//        strings.sort(comparator2);
+//        System.out.println("Sort to length: " + strings);
+
+        User sarah = new User("Sarah", 28);
+        User james = new User("James", 35);
+        User mary = new User("Mary", 33);
+        User john1 = new User("John", 24);
+        User john2 = new User("John", 25);
+
+        List<User> users = new ArrayList<>(List.of(sarah, james, mary, john1, john2));
+
+//        Comparator<User> comparator = Comparator.comparing(User::getName);
+        Comparator<User> comparatorName = Comparator.comparing(user -> user.getName());
+//        Comparator<User> comparatorAge = Comparator.comparing(User::getAge);
+        Comparator<User> comparatorAge = Comparator.comparing(user -> user.getAge());
+        Comparator<User> comparator = comparatorName.thenComparing(comparatorAge);
+        Comparator<User> reversed = comparator.reversed();
+
+        users.sort(reversed);
+//        users.forEach(System.out::println);
+        users.forEach(u -> System.out.println(u));
     }
 
 }

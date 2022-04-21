@@ -3,10 +3,7 @@ package com.bkitsolution;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 public class Main {
 
@@ -28,6 +25,7 @@ public class Main {
 //        };
 //        d2.draw();
 
+        //Chapter 2: Implementing lambda expressions with functional interfaces
         //Supplier
 //        Supplier<String> supplier = () -> {
 //            System.out.println("I am inside the Supplier");
@@ -56,26 +54,37 @@ public class Main {
 ////        strings.forEach(System.out::println);
 //        strings.forEach(string -> System.out.println(string));
 
-        User sarah = new User("Sarah");
-        User james = new User("James");
-        User mary = new User("Mary");
-        User john = new User("John");
+        //Supplier, Consumers, Predicates and Functions (Chapter 3)
+//        User sarah = new User("Sarah");
+//        User james = new User("James");
+//        User mary = new User("Mary");
+//        User john = new User("John");
+//
+//        List<User> users = new ArrayList<>(List.of(sarah, james, mary, john));
+//        List<String> names = new ArrayList<>();
+//        Function<User, String> toName = (User user) -> user.getName();
+//        for (User user: users) {
+////            System.out.println("Name: " + toName.apply(user));
+//            String name = toName.apply(user);
+//            names.add(name);
+//        }
+////        Consumer<User> action = System.out::println;
+////        Consumer<User> action = u -> System.out.println(u);
+////        users.forEach(System.out::println);
+//        users.forEach(u -> System.out.println(u));
+////        names.forEach(System.out::println);
+////        names.forEach((String s) -> System.out.println(s));
+//        names.forEach(s -> System.out.println(s));
 
-        List<User> users = new ArrayList<>(List.of(sarah, james, mary, john));
-        List<String> names = new ArrayList<>();
-        Function<User, String> toName = (User user) -> user.getName();
-        for (User user: users) {
-//            System.out.println("Name: " + toName.apply(user));
-            String name = toName.apply(user);
-            names.add(name);
-        }
-//        Consumer<User> action = System.out::println;
-//        Consumer<User> action = u -> System.out.println(u);
-//        users.forEach(System.out::println);
-        users.forEach(u -> System.out.println(u));
-//        names.forEach(System.out::println);
-//        names.forEach((String s) -> System.out.println(s));
-        names.forEach(s -> System.out.println(s));
+        //Objects and primirive types
+        IntSupplier supplier = () -> 10 + 15;
+        int j = 20;
+        int i = supplier.getAsInt() + j;
+        System.out.println("i = " + i);
+
+        DoubleToIntFunction function = value -> (int)(Math.floor(value));
+        int pi = function.applyAsInt(Math.PI);
+        System.out.println("Integer PI = " + pi);
     }
 
 }
